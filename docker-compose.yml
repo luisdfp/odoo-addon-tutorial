@@ -1,0 +1,19 @@
+version: '2'
+services:
+  odoo:
+    image: odoo:10.0
+    restart: always
+    links:
+      - db
+    volumes:
+      - ./addons:/mnt/extra-addons
+    ports:
+      - "8069:8069"
+  db:
+    image: postgres:9.4
+    restart: always
+    ports: 
+      - "5555:5432"
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
